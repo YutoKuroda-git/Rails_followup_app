@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "interactions/index"
-  get "customers/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,4 +12,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  root "devise/sessions#new"
+
+  resources :customers do
+    resources :interactions, only: [ :create, :destroy ]
+  end
 end

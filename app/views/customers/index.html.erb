@@ -1,2 +1,111 @@
-<h1>Customers#index</h1>
-<p>Find me in app/views/customers/index.html.erb</p>
+<main class="dashboard">
+
+  <section class="dash-head">
+    <div>
+      <h2 class="dash-title">Active Followups</h2>
+      <p class="dash-sub">進行中のタスクを管理します</p>
+    </div>
+    <%= link_to new_customer_path, class: "btn-add" do %>
+      <span class="material-symbols-outlined">add</span>
+      <span>新規追加</span>
+    <% end %>
+  </section>
+
+  <section class="tbl-card">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Due Date</th>
+          <th>Last Update</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr class="tbl-row" onclick="location.href='<%= customer_path(customer) %>'">
+            <td>
+              <span class="badge badge-<%= customer.status %>">
+                <%= customer.status.humanize %>
+              </span>
+            </td>
+            <td>
+              <strong class="row-name"><%= customer.company_name %></strong>
+              <small class="row-sub"><%= customer.contact_name %></small>
+            </td>
+            <td class="td-muted"><%= customer.email.presence || "-" %></td>
+            <td class="td-muted">
+              <%= customer.respond_to?(:due_date) && customer.due_date ? l(customer.due_date) : "-" %>
+            </td>
+            <td class="td-muted"><%= l(customer.updated_at, format: :short) %></td>
+            <td class="td-action" onclick="event.stopPropagation()">
+              <div class="more-wrap">
+                <button class="more-btn" onclick="toggleMore(this)">⋯</button>
+                <div class="more-menu">
+                  <%= link_to "詳細", customer_path(customer),     class: "more-item" %>
+                  <%= link_to "編集", edit_customer_path(customer), class: "more-item" %>
+                  <%= link_to "削除", customer_path(customer),
+                        data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+                        class: "more-item more-item--del" %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+
+        <% if @customers.empty? %>
+          <tr>
+            <td colspan="6" class="td-empty">顧客データがありません。「新規追加」から登録してください。</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon--progress">
+          <span class="material-symbols-outlined">pending_actions</span>
+        </div>
+        <span class="card-tag tag--progress">In Progress</span>
+      </div>
+      <div class="card-num">
+        <span class="num"><%= @in_progress_count %></span>
+        <span class="unit">件</span>
+      </div>
+      <p class="card-desc">進行中</p>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon--done">
+          <span class="material-symbols-outlined">task_alt</span>
+        </div>
+        <span class="card-tag tag--done">Completed</span>
+      </div>
+      <div class="card-num">
+        <span class="num"><%= @completed_count %></span>
+        <span class="unit">件</span>
+      </div>
+      <p class="card-desc">完了</p>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon--due">
+          <span class="material-symbols-outlined">notification_important</span>
+        </div>
+        <span class="card-tag tag--due">Due Soon</span>
+      </div>
+      <div class="card-num">
+        <span class="num"><%= @due_soon_count %></span>
+        <span class="unit">件</span>
+      </div>
+      <p class="card-desc">期限間近</p>
+    </div>
+  </section>
+
+</main>
