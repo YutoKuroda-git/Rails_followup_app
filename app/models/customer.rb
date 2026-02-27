@@ -4,8 +4,12 @@ class Customer < ApplicationRecord
 
   enum status: { in_progress: 0, pending: 1, completed: 2 }
 
-  validates :company_name,  presence: true
-  validates :contact_name,  presence: true
+  validates :company_name, length: { maximum: 100 }, allow_blank: true
+  validates :contact_name, presence: true, length: { maximum: 100 }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+  validates :phone, format: { with: /\A[0-9\-\+\(\)]{10,15}\z/ }, allow_blank: true
+  validates :needs, length: { maximum: 500 }, allow_blank: true
+  validates :notes, length: { maximum: 500 }, allow_blank: true
   validates :status,        presence: true
 
   def due_soon?

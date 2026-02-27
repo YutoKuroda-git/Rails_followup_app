@@ -5,7 +5,11 @@ body {
   margin: 0;
 }
 
-/* ===== Header ===== */
+.field_with_errors {
+  display: contents;
+}
+
+/* === ヘッダー === */
 .app-header {
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
@@ -55,7 +59,7 @@ body {
   border-radius: 50%;
 }
 
-/* ===== Footer ===== */
+/* === フッター === */
 .app-footer {
   margin-top: 80px;
   padding: 24px;

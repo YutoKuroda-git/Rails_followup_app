@@ -28,7 +28,8 @@
           <tr class="tbl-row" onclick="location.href='<%= customer_path(customer) %>'">
             <td>
               <span class="badge badge-<%= customer.status %>">
-                <%= customer.status.humanize %>
+                <% labels = { "in_progress" => "対応中", "pending" => "保留", "completed" => "完了" } %>
+                <%= labels[customer.status] %>
               </span>
             </td>
             <td>
@@ -107,5 +108,5 @@
       <p class="card-desc">期限間近</p>
     </div>
   </section>
-
+  
 </main>

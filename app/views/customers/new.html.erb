@@ -1,0 +1,69 @@
+<main class="form-page">
+  <div class="form-wrap">
+
+    <div class="form-head">
+      <h1 class="form-title">新規顧客の登録</h1>
+      <p class="form-sub">顧客データを登録すると、タイムラインで対応履歴を管理できます。</p>
+    </div>
+
+    <div class="form-card">
+
+      <%= render "shared/error", object: @customer %>
+
+      <%= form_with model: @customer, local: true, class: "form" do |f| %>
+
+        <div class="form-row">
+          <div class="form-group">
+            <%= f.label :company_name, "会社名", class: "form-label" %>
+            <%= f.text_field :company_name, placeholder: "会社名を入力", class: "form-input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :contact_name, "顧客名", class: "form-label form-label--required" %>
+            <%= f.text_field :contact_name, placeholder: "名前を入力", class: "form-input" %>
+            <%= render "shared/field_error", object: @customer, field: :contact_name %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス", class: "form-label" %>
+            <%= f.email_field :email, placeholder: "例）tanaka@example.com", class: "form-input" %>
+            <%= render "shared/field_error", object: @customer, field: :email %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :phone, "電話番号", class: "form-label" %>
+            <%= f.telephone_field :phone, placeholder: "例）090-1234-5678 / 09012345678", class: "form-input" %>
+            <%= render "shared/field_error", object: @customer, field: :phone %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :needs, "課題 / お問い合わせ内容", class: "form-label" %>
+          <%= f.text_area :needs, rows: 3, placeholder: "例）価格交渉・契約更新・クレーム対応・サービス説明など", class: "form-input" %>
+          <%= render "shared/field_error", object: @customer, field: :needs %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :notes, "備考", class: "form-label" %>
+          <%= f.text_area :notes, rows: 3, placeholder: "社内メモや補足情報を入力してください", class: "form-input" %>
+          <%= render "shared/field_error", object: @customer, field: :notes %>
+        </div>
+
+        <div class="form-group form-group--short">
+          <%= f.label :status, "ステータス", class: "form-label form-label--required" %>
+          <%= f.select :status, [["対応中", "in_progress"], ["保留", "pending"], ["完了", "completed"]], {}, class: "form-input form-select" %>
+          <%= render "shared/field_error", object: @customer, field: :status %>
+        </div>
+
+        <%# ボタン %>
+        <div class="form-actions">
+          <%= link_to "キャンセル", customers_path, class: "btn-cancel" %>
+          <%= f.submit "登録する", class: "btn-submit" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</main>

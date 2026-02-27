@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        blank: "を入力してください"
+        too_long: "は%{count}文字以内で入力してください"
+        invalid: "は正しい形式で入力してください"
+    attributes:
+      customer:
+        contact_name: "顧客名"
+        email: "メールアドレス"
+        phone: "電話番号"
+        status: "ステータス"
+        needs: "内容"
+        notes: "備考"
