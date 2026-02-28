@@ -67,3 +67,96 @@ body {
   font-size: 12px;
   color: #6b7280;
 }
+
+/* === フラッシュ通知 === */
+.flash-wrap {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.flash-card {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  min-width: 140px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  animation: flash-in 0.3s ease;
+}
+
+.flash-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.flash-icon--notice {
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.flash-icon--notice .material-symbols-outlined {
+  color: #16a34a;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.flash-icon--alert {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.flash-icon--alert .material-symbols-outlined {
+  color: #ef4444;
+  font-size: 20px;
+}
+
+.flash-text {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.flash-close {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  border-left: 1px solid #e2e8f0;
+  color: #94a3b8;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  transition: color 0.15s;
+}
+
+.flash-close:hover {
+  color: #475569; }
+
+.flash-close .material-symbols-outlined {
+  font-size: 18px; 
+}
+
+@keyframes flash-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

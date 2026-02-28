@@ -1,4 +1,4 @@
-/* ===== ログイン画面 ===== */
+/* === ログイン画面 === */
 .login-wrapper {
   min-height: 100vh;
   display: flex;
@@ -115,7 +115,7 @@
   color: #94a3b8;
 } 
 
-/* ── アカウント作成画面 ── */
+/* === アカウント作成画面 === */
 .signup-page {
   min-height: 100vh;
   padding: 24px;

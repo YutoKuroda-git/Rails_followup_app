@@ -1,0 +1,26 @@
+<% if notice.present? || alert.present? %>
+  <div class="flash-wrap" id="flash-message">
+    <% if notice.present? %>
+      <div class="flash-card">
+        <div class="flash-icon flash-icon--notice">
+          <span class="material-symbols-outlined">check</span>
+        </div>
+        <p class="flash-text"><%= notice %></p>
+        <button class="flash-close" onclick="this.closest('#flash-message').remove()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="flash-card">
+        <div class="flash-icon flash-icon--alert">
+          <span class="material-symbols-outlined">error</span>
+        </div>
+        <p class="flash-text"><%= alert %></p>
+        <button class="flash-close" onclick="this.closest('#flash-message').remove()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

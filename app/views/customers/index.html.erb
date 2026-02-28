@@ -47,9 +47,7 @@
                 <div class="more-menu">
                   <%= link_to "詳細", customer_path(customer),     class: "more-item" %>
                   <%= link_to "編集", edit_customer_path(customer), class: "more-item" %>
-                  <%= link_to "削除", customer_path(customer),
-                        data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
-                        class: "more-item more-item--del" %>
+                  <%= link_to "削除", customer_path(customer), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "more-item more-item--del" %>
                 </div>
               </div>
             </td>
@@ -108,5 +106,5 @@
       <p class="card-desc">期限間近</p>
     </div>
   </section>
-  
+
 </main>

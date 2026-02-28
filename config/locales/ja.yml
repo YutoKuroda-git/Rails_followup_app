@@ -13,3 +13,7 @@ ja:
         status: "ステータス"
         needs: "内容"
         notes: "備考"
+      interaction:
+        summary: "内容"
+        contact_type: "対応種別"
+        contacted_at: "対応日時"

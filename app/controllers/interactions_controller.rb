@@ -6,9 +6,12 @@ class InteractionsController < ApplicationController
     @interaction = @customer.interactions.build(interaction_params)
     @interaction.user = current_user
     if @interaction.save
+      @customer.update(status: params[:interaction][:status]) if params[:interaction][:status].present?
       redirect_to @customer, notice: "タイムラインに追加しました"
     else
-      redirect_to @customer, alert: "入力内容を確認してください"
+      flash.now[:alert] = "タイムラインに追加できませんでした"
+      @interactions = @customer.interactions.timeline_order
+      render "customers/show", status: :unprocessable_entity
     end
   end
 

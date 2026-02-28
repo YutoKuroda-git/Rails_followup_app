@@ -1,4 +1,220 @@
-<main class="dashboard">
-  <p>show画面は準備中です</p>
-  <%= link_to "一覧に戻る", customers_path, class: "btn-cancel" %>
+<main class="show-page">
+
+  <div>
+    <%= link_to customers_path, class: "back-btn" do %>
+      <span class="material-symbols-outlined">arrow_back</span>
+      <span>一覧に戻る</span>
+    <% end %>
+  </div>
+
+  <section class="cust-card">
+    <div class="cust-card-inner">
+
+      <div class="cust-top">
+        <% status_styles = { "in_progress" => "cust-badge--progress", "pending" => "cust-badge--pending", "completed" => "cust-badge--done" } %>
+        <% status_labels = { "in_progress" => "対応中", "pending" => "保留", "completed" => "完了" } %>
+        <span class="cust-badge <%= status_styles[@customer.status] %>">
+          <span class="cust-badge-dot"></span>
+          <%= status_labels[@customer.status] %>
+        </span>
+        <div class="cust-btns">
+          <%= link_to edit_customer_path(@customer), class: "cust-btn" do %>
+            <span class="material-symbols-outlined">edit</span>
+            編集
+          <% end %>
+          <%= link_to customer_path(@customer), class: "cust-btn cust-btn--del", data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } do %>
+            <span class="material-symbols-outlined">delete</span>
+            削除
+          <% end %>
+        </div>
+      </div>
+
+      <div class="cust-info-row">
+        <div class="cust-name-group">
+          <span class="material-symbols-outlined cust-info-icon">person</span>
+          <% if @customer.company_name.present? %>
+            <span class="cust-company"><%= @customer.company_name %></span>
+            <span class="cust-divider">|</span>
+            <span class="cust-contact"><%= @customer.contact_name %></span>
+          <% else %>
+            <span class="cust-contact"><%= @customer.contact_name %></span>
+          <% end %>
+        </div>
+        <% if @customer.email.present? %>
+          <div class="cust-meta">
+            <span class="material-symbols-outlined cust-info-icon">mail</span>
+            <span><%= @customer.email %></span>
+          </div>
+        <% end %>
+        <% if @customer.phone.present? %>
+          <div class="cust-meta">
+            <span class="material-symbols-outlined cust-info-icon">call</span>
+            <span><%= @customer.phone %></span>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="tl-line"></div>
+
+    <% if @customer.needs.present? || @customer.notes.present? %>
+      <div class="tl-item">
+        <div class="tl-icon tl-icon--init">
+          <span class="material-symbols-outlined">assignment</span>
+        </div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <span class="tl-type tl-type--init">初回登録情報</span>
+            <span class="tl-dot">•</span>
+            <time class="tl-time">登録日：<%= l(@customer.created_at, format: :short) %></time>
+          </div>
+          <div class="tl-body">
+            <% if @customer.needs.present? %>
+              <div class="tl-section">
+                <span class="tl-section-label">課題 / 問い合わせ内容</span>
+                <p class="tl-section-text"><%= @customer.needs %></p>
+              </div>
+            <% end %>
+            <% if @customer.notes.present? %>
+              <div class="tl-section">
+                <span class="tl-section-label">備考</span>
+                <p class="tl-section-text"><%= @customer.notes %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @interactions.any? %>
+      <% icons = { "email" => "mail", "phone" => "call", "chat" => "chat_bubble", "visit" => "person_pin_circle", "other" => "more_horiz" } %>
+      <% type_labels = { "email" => "メール", "phone" => "電話", "chat" => "チャット", "visit" => "対面", "other" => "その他" } %>
+      <% @interactions.each do |interaction| %>
+        <div class="tl-item">
+          <div class="tl-icon tl-icon--<%= interaction.contact_type %>">
+            <span class="material-symbols-outlined"><%= icons[interaction.contact_type] %></span>
+          </div>
+          <div class="tl-card">
+            <%= link_to customer_interaction_path(@customer, interaction), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "tl-del-btn" do %>
+              <span class="material-symbols-outlined">delete</span>
+            <% end %>
+            <div class="tl-meta">
+              <span class="tl-type tl-type--<%= interaction.contact_type %>">
+                <%= type_labels[interaction.contact_type] %>
+              </span>
+              <span class="tl-dot">•</span>
+              <time class="tl-time"><%= l(interaction.contacted_at, format: :short) %></time>
+              <span class="tl-dot">•</span>
+              <span class="tl-recorder"><%= interaction.user.name %></span>
+            </div>
+            <div class="tl-body">
+              <div class="tl-section">
+                <span class="tl-section-label">課題 / 問い合わせ内容</span>
+                <p class="tl-section-text tl-preserve"><%= interaction.summary %></p>
+              </div>
+              <% if interaction.action_taken.present? %>
+                <div class="tl-divider"></div>
+                <div class="tl-section">
+                  <span class="tl-section-label">対応内容</span>
+                  <p class="tl-section-text tl-preserve"><%= interaction.action_taken %></p>
+                </div>
+              <% end %>
+              <% if interaction.due_date.present? %>
+                <div class="tl-due">
+                  <span class="material-symbols-outlined">calendar_today</span>
+                  <span>期日：<%= l(interaction.due_date, format: :default) %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="tl-empty">まだ対応履歴がありません</div>
+    <% end %>
+  </section>
+
+  <section class="form-card">
+
+    <input type="checkbox" id="form-toggle" class="tl-toggle-input">
+    <label for="form-toggle" class="form-card-head">
+      <h3 class="form-card-title">
+        <span class="material-symbols-outlined">add_circle</span>
+        対応履歴を追加
+      </h3>
+      <span class="material-symbols-outlined tl-expand-icon">expand_more</span>
+    </label>
+
+    <%= form_with model: [@customer, @interaction], local: true, class: "tl-form form-content" do |f| %>
+
+      <div class="tl-form-row">
+        <div class="form-group">
+          <label class="form-label form-label--required">対応種別</label>
+          <div class="tl-radio-bar">
+            <% [["mail", "email", "メール"], ["call", "phone", "電話"], ["chat_bubble", "chat", "チャット"], ["person_pin_circle", "visit", "対面"], ["more_horiz", "other", "その他"]].each do |icon, value, label| %>
+              <label class="tl-radio-item">
+                <%= f.radio_button :contact_type, value, class: "tl-radio-input", id: "contact_type_#{value}" %>
+                <div class="tl-radio-card tl-radio-card--<%= value %>">
+                  <span class="material-symbols-outlined"><%= icon %></span>
+                  <span><%= label %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+          <%= render "shared/field_error", object: @interaction, field: :contact_type %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">ステータス更新</label>
+          <div class="tl-radio-bar">
+            <% [["pending_actions", "in_progress", "対応中"], ["schedule", "pending", "保留"], ["check_circle", "completed", "完了"]].each do |icon, value, label| %>
+              <label class="tl-radio-item">
+                <input type="radio" name="interaction[status]" value="<%= value %>"
+                       class="tl-radio-input" id="status_<%= value %>"
+                       <%= "checked" if @customer.status == value %>>
+                <div class="tl-radio-card tl-radio-card--status-<%= value %>">
+                  <span class="material-symbols-outlined"><%= icon %></span>
+                  <span><%= label %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-form-half">
+        <div class="form-group">
+          <label class="form-label form-label--required">対応日時</label>
+          <%= f.datetime_local_field :contacted_at, class: "form-input" %>
+          <%= render "shared/field_error", object: @interaction, field: :contacted_at %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label form-label--required">課題 / 問い合わせ内容</label>
+        <%= f.text_area :summary, rows: 6, placeholder: "顧客の課題や問い合わせ内容を入力してください", class: "form-input tl-textarea--lg" %>
+        <%= render "shared/field_error", object: @interaction, field: :summary %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">対応内容</label>
+        <%= f.text_area :action_taken, rows: 4, placeholder: "具体的な対応や解決策を入力してください", class: "form-input tl-textarea--md" %>
+      </div>
+
+      <div class="tl-form-row tl-form-row--bottom">
+        <div class="form-group">
+          <label class="form-label">期日</label>
+          <%= f.date_field :due_date, class: "form-input" %>
+        </div>
+        <div class="tl-submit-wrap">
+          <%= f.submit "タイムラインに追加", class: "btn-submit" %>
+        </div>
+      </div>
+
+    <% end %>
+  </section>
+
 </main>
