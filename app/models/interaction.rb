@@ -2,7 +2,7 @@ class Interaction < ApplicationRecord
   belongs_to :customer
   belongs_to :user
 
-  enum contact_type: { email: 0, phone: 1, chat: 2, visit: 3, other: 4 }
+  enum :contact_type, { email: 0, phone: 1, chat: 2, visit: 3, other: 4 }
 
   validates :summary, presence: true, length: { maximum: 2000 }
   validates :action_taken, presence: true, length: { maximum: 2000 }
