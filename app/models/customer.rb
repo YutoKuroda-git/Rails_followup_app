@@ -12,6 +12,10 @@ class Customer < ApplicationRecord
   validates :notes, length: { maximum: 500 }, allow_blank: true
   validates :status,        presence: true
 
+  def next_due_date
+    interactions.where.not(due_date: nil).order(due_date: :asc).first&.due_date
+  end
+
   def due_soon?
     interactions
       .where(due_date: Date.today..48.hours.from_now.to_date)

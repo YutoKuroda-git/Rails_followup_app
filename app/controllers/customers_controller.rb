@@ -7,7 +7,8 @@ class CustomersController < ApplicationController
     @in_progress_count = @customers.in_progress.count
     @pending_count     = @customers.pending.count
     @completed_count   = @customers.completed.count
-    @due_soon_count    = @customers.in_progress.count(&:due_soon?)
+    @customers = @customers.sort_by { |c| [ c.due_soon? ? 0 : 1, -c.updated_at.to_i ] }
+    @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(10)
   end
 
   def show

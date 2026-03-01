@@ -200,8 +200,9 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label">対応内容</label>
+        <label class="form-label form-label--required">対応内容</label>
         <%= f.text_area :action_taken, rows: 4, placeholder: "具体的な対応や解決策を入力してください", class: "form-input tl-textarea--md" %>
+        <%= render "shared/field_error", object: @interaction, field: :action_taken %>
       </div>
 
       <div class="tl-form-row tl-form-row--bottom">
@@ -210,7 +211,7 @@
           <%= f.date_field :due_date, class: "form-input" %>
         </div>
         <div class="tl-submit-wrap">
-          <%= f.submit "タイムラインに追加", class: "btn-submit" %>
+          <%= f.submit "タイムラインに追加", class: "btn-tl-submit" %>
         </div>
       </div>
 

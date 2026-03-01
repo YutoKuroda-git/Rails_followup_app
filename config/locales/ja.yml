@@ -14,6 +14,27 @@ ja:
         needs: "内容"
         notes: "備考"
       interaction:
-        summary: "内容"
+        summary: "課題 / 問い合わせ内容"
+        action_taken: "対応内容"
         contact_type: "対応種別"
         contacted_at: "対応日時"
+
+  views:
+    pagination:
+      first: "最初"
+      last: "最後"
+      previous: "前へ"
+      next: "次へ"
+      truncate: "…"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "1時間"
+        other: "%{count}時間"
+      about_x_months:
+        one: "1ヶ月"
+        other: "%{count}ヶ月"
+      about_x_years:
+        one: "1年"
+        other: "%{count}年"

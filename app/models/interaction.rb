@@ -4,7 +4,8 @@ class Interaction < ApplicationRecord
 
   enum contact_type: { email: 0, phone: 1, chat: 2, visit: 3, other: 4 }
 
-  validates :summary,      presence: true
+  validates :summary, presence: true, length: { maximum: 2000 }
+  validates :action_taken, presence: true, length: { maximum: 2000 }
   validates :contact_type, presence: { message: "を選択してください" }
   validates :contacted_at, presence: true
 

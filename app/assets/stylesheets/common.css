@@ -61,7 +61,7 @@ body {
 
 /* === フッター === */
 .app-footer {
-  margin-top: 80px;
+  margin-top: 40px;
   padding: 24px;
   text-align: center;
   font-size: 12px;
@@ -134,7 +134,7 @@ body {
   align-items: center;
   padding-left: 16px;
   border-left: 1px solid #e2e8f0;
-  color: #94a3b8;
+  color: #7f8ea3;
   cursor: pointer;
   background: none;
   border-top: none;

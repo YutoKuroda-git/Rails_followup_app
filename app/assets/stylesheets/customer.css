@@ -80,11 +80,14 @@
 }
 
 .tbl tbody tr {
-  border-top: 1px solid #f1f5f9; transition: background 0.1s; 
+  border-top: 1px solid #f1f5f9;
+  transition: background 0.1s;
 }
 
 .tbl td {
-  padding: 14px 20px; font-size: 14px; vertical-align: middle; 
+  padding: 14px 20px;
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 .tbl-row {
@@ -95,16 +98,30 @@
   background: #f8fafc; 
 }
 
+.tbl-row--due {
+  background: #fff5f5;
+  border-left: 3px solid #ef4444;
+}
+
+.td-due-soon {
+  color: #ef4444;
+  font-weight: 700;
+}
+
 .td-muted {
-  color: #94a3b8; 
+  color: #7f8ea3; 
 }
 
 .td-action {
-  text-align: right; white-space: nowrap; 
+  text-align: right;
+  white-space: nowrap;
 }
 
 .td-empty {
-  text-align: center; color: #94a3b8; padding: 48px; font-size: 14px; 
+  text-align: center;
+  color: #7f8ea3;
+  padding: 48px;
+  font-size: 14px;
 }
 
 .badge {
@@ -119,26 +136,37 @@
 }
 
 .badge-in_progress {
-  background: rgba(19,127,236,0.10); color: #137fec; 
+  background: rgba(19,127,236,0.10);
+  color: #137fec;
 }
 
 .badge-completed {
-  background: #d1fae5; color: #059669; 
+  background: #d1fae5;
+  color: #059669;
 }
 
 .badge-pending {
-  background: #fef3c7; color: #d97706; 
+  background: #fef3c7;
+  color: #d97706;
 }
 
 .row-name {
-  display: block; font-size: 14px; font-weight: 600; color: #0f172a; 
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
 }
+
 .row-sub {
-  display: block; font-size: 12px; color: #94a3b8; margin-top: 2px; 
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
 }
 
 .more-wrap {
-  position: relative; display: inline-block; 
+  position: relative;
+  display: inline-block;
 }
 
 .more-btn {
@@ -146,7 +174,7 @@
   border: none;
   cursor: pointer;
   font-size: 18px;
-  color: #94a3b8;
+  color: #7f8ea3;
   padding: 4px 8px;
   border-radius: 6px;
   line-height: 1;
@@ -154,7 +182,8 @@
 }
 
 .more-btn:hover {
-  color: #137fec; background: rgba(19,127,236,0.08); 
+  color: #137fec;
+  background: rgba(19,127,236,0.08);
 }
 
 .more-menu {
@@ -176,7 +205,13 @@
 }
 
 .more-item {
-  display: block; padding: 10px 16px; font-size: 13px; color: #374151; text-decoration: none; transition: background 0.1s; 
+  display: block;
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #374151;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.1s;
 }
 
 .more-item:hover {
@@ -189,6 +224,69 @@
 
 .more-item--del:hover {
   background: #fef2f2; 
+}
+
+/* === pagination === */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+}
+
+.pagination-info {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.pagination nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+}
+
+.pagination nav .page a,
+.pagination nav .next a,
+.pagination nav .prev a,
+.pagination nav .first a,
+.pagination nav .last a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: none;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  transition: all 0.15s;
+}
+
+.pagination nav .page a:hover,
+.pagination nav .next a:hover,
+.pagination nav .prev a:hover,
+.pagination nav .first a:hover,
+.pagination nav .last a:hover {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.pagination nav .page.current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px !important;
+  font-size: 12px;
+  font-weight: 600;
+  background: #137fec !important;
+  color: #fff;
+  border: 1px solid #137fec !important;
+  border-radius: 6px;
 }
 
 .cards {
@@ -221,19 +319,23 @@
 }
 
 .card-icon .material-symbols-outlined {
-  font-size: 22px; line-height: 1; 
+  font-size: 22px;
+  line-height: 1;
 }
 
 .icon--progress {
-  background: rgba(19,127,236,0.10); color: #137fec; 
+  background: rgba(19,127,236,0.10);
+  color: #137fec;
 }
 
 .icon--done {
-  background: #d1fae5; color: #059669; 
+  background: #d1fae5;
+  color: #059669;
 }
 
-.icon--due {
-  background: #fef3c7; color: #d97706; 
+.icon--pending {
+  background: #fef3c7;
+  color: #ca8a04;
 }
 
 .card-tag {
@@ -246,31 +348,42 @@
 }
 
 .tag--progress {
-  background: rgba(19,127,236,0.10); color: #137fec; 
+  background: rgba(19,127,236,0.10);
+  color: #137fec;
 }
 
 .tag--done {
-  background: #d1fae5; color: #059669; 
+  background: #d1fae5;
+  color: #059669;
 }
 
-.tag--due {
-  background: #fef3c7; color: #d97706; 
+.tag--pending {
+  background: #fef3c7;
+  color: #ca8a04;
 }
 
 .card-num {
-  display: flex; align-items: baseline; gap: 6px; 
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
 .num {
-  font-size: 40px; font-weight: 900; color: #0f172a; line-height: 1; 
+  font-size: 40px;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
 }
 
 .unit {
-  font-size: 13px; color: #94a3b8; 
+  font-size: 13px;
+  color: #7f8ea3;
 }
 
 .card-desc {
-  font-size: 13px; color: #64748b; margin-top: 8px; 
+  font-size: 13px;
+  color: #7f8ea3;
+  margin-top: 8px;
 }
 
 /* === New フォームページ === */
@@ -426,8 +539,7 @@ textarea.form-input {
 }
 
 .btn-submit {
-  width: 100%;
-  padding: 13px 16px;
+  padding: 10px 24px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
@@ -564,11 +676,13 @@ textarea.form-input {
 }
 
 .cust-btn:hover {
-  border-color: #137fec; color: #137fec; 
+  border-color: #137fec;
+  color: #137fec;
 }
 
 .cust-btn--del:hover {
-  border-color: #fca5a5; color: #dc2626; 
+  border-color: #fca5a5;
+  color: #dc2626;
 }
 
 .cust-btn .material-symbols-outlined {
@@ -589,11 +703,13 @@ textarea.form-input {
 }
 
 .cust-info-icon {
-  color: #94a3b8;
+  color: #7f8ea3;
 }
 
 .cust-company {
-  font-size: 15px; font-weight: 600; color: #334155; 
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
 }
 
 .cust-divider {
@@ -601,7 +717,9 @@ textarea.form-input {
 }
 
 .cust-contact {
-  font-size: 15px; font-weight: 700; color: #0f172a; 
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .cust-meta {
@@ -676,7 +794,7 @@ textarea.form-input {
 }
 
 .tl-icon--other {
-  background: #94a3b8; 
+  background: #7f8ea3; 
 }
 
 .tl-card {
@@ -769,12 +887,13 @@ textarea.form-input {
 
 .tl-time     {
   font-size: 12px; 
-  color: #94a3b8; 
+  color: #7f8ea3; 
 }
 
 .tl-recorder {
   font-size: 12px; 
-  color: #64748b; font-weight: 600; 
+  color: #64748b;
+  font-weight: 600;
 }
 
 .tl-body {
@@ -821,7 +940,7 @@ textarea.form-input {
   gap: 6px;
   font-size: 11px;
   font-weight: 700;
-  color: #94a3b8;
+  color: #7f8ea3;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding-top: 8px;
@@ -835,7 +954,7 @@ textarea.form-input {
 .tl-empty {
   padding: 48px;
   text-align: center;
-  color: #94a3b8;
+  color: #7f8ea3;
   font-size: 14px;
   background: #fff;
   border-radius: 12px;
@@ -880,11 +999,12 @@ textarea.form-input {
 }
 
 .form-card-title .material-symbols-outlined {
-  color: #137fec; font-size: 20px;
+  color: #137fec;
+  font-size: 20px;
 }
 
 .tl-expand-icon {
-  color: #94a3b8;
+  color: #7f8ea3;
   transition: transform 0.2s;
   font-size: 20px;
 }
@@ -949,7 +1069,7 @@ textarea.form-input {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #94a3b8;
+  color: #7f8ea3;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -1008,3 +1128,23 @@ textarea.form-input {
   align-items: flex-end;
 }
 
+.btn-tl-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  background: #137fec;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  box-shadow: 0 4px 12px rgba(19, 127, 236, 0.15);
+}
+
+.btn-tl-submit:hover {
+  background: #0f6fd4;
+}

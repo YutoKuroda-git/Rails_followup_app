@@ -61,3 +61,5 @@ gem "dotenv-rails", "~> 3.2"
 gem "devise", "~> 5.0"
 
 gem "rails-i18n", "~> 7.0"
+
+gem "kaminari", "~> 1.2"
