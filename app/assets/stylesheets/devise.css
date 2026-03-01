@@ -95,8 +95,18 @@
 }
 
 .login-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-top: 16px;
-  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+  border-top: 1px solid #e5e7eb;
+}
+
+.login-footer p {
+  margin-bottom: 0;
 }
 
 .text-link {
@@ -113,7 +123,30 @@
   text-align: center;
   font-size: 12px;
   color: #94a3b8;
-} 
+}
+
+.guest-login {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-guest {
+  width: 100%;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.btn-guest:hover {
+  background: #e2e8f0;
+}
 
 /* === アカウント作成画面 === */
 .signup-page {
@@ -223,4 +256,201 @@
   font-size: 12px;
   color: #94a3b8;
   text-align: center;
+}
+
+/* === アカウント設定ページ === */
+.acc-container {
+  width: 100%;
+  max-width: 640px;
+}
+
+.acc-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.acc-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.acc-subtitle {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.acc-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.acc-avatar-relative {
+  position: relative;
+  display: inline-block;
+}
+
+.acc-avatar {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.acc-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.acc-avatar-icon {
+  font-size: 40px;
+  color: #94a3b8;
+}
+
+.acc-avatar-remove-btn {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s;
+  z-index: 10;
+}
+
+.acc-avatar-remove-btn:hover {
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+.acc-avatar-remove-btn .material-symbols-outlined {
+  font-size: 14px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.acc-avatar-remove-btn:hover .material-symbols-outlined {
+  color: #dc2626;
+}
+
+.acc-avatar-remove-input {
+  display: none;
+}
+
+.acc-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.acc-avatar-overlay .material-symbols-outlined {
+  color: #fff;
+  font-size: 22px;
+}
+
+.acc-avatar:hover .acc-avatar-overlay {
+  opacity: 1;
+}
+
+.acc-avatar-input {
+  display: none;
+}
+
+.acc-avatar-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+.acc-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 8px 0;
+}
+
+.acc-danger-zone {
+  margin-top: 32px;
+  padding-top: 62px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.acc-danger-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(254, 242, 242, 0.3);
+  border: 1px solid rgba(254, 202, 202, 0.5);
+  border-radius: 8px;
+}
+
+.acc-danger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.acc-danger-title {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.acc-danger-title .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.acc-danger-desc {
+  margin-top: 0;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.acc-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+  text-decoration: none;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+
+.acc-delete-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
 }

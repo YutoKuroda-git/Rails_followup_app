@@ -1,42 +1,94 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="login-wrapper">
+  <div class="acc-container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="acc-header">
+      <h1 class="acc-title">アカウント設定</h1>
+      <p class="acc-subtitle">プロフィール情報を更新します</p>
+    </div>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+    <div class="login-card">
+
+      <%= render "shared/error", object: resource %>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true, class: "login-form" }) do |f| %>
+
+        <%# アイコン画像 %>
+        <div class="acc-avatar-wrap">
+          <div class="acc-avatar-relative">
+            <label class="acc-avatar" for="avatar-upload">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar, class: "acc-avatar-img" %>
+              <% else %>
+                <span class="material-symbols-outlined acc-avatar-icon">person</span>
+              <% end %>
+              <div class="acc-avatar-overlay">
+                <span class="material-symbols-outlined">upload</span>
+              </div>
+              <%= f.file_field :avatar, id: "avatar-upload", class: "acc-avatar-input" %>
+            </label>
+            <% if current_user.avatar.attached? %>
+              <label class="acc-avatar-remove-btn" title="画像を削除">
+                <%= f.check_box :remove_avatar, id: "remove-avatar", class: "acc-avatar-remove-input" %>
+                <span class="material-symbols-outlined">close</span>
+              </label>
+            <% end %>
+          </div>
+          <p class="acc-avatar-hint">クリックして変更</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <%= f.label :name, "氏名", class: "form-label form-label--required" %>
+            <%= f.text_field :name, placeholder: "氏名を入力", class: "form-input" %>
+            <%= render "shared/field_error", object: resource, field: :name %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス", class: "form-label form-label--required" %>
+            <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレスを入力", class: "form-input" %>
+            <%= render "shared/field_error", object: resource, field: :email %>
+          </div>
+        </div>
+
+        <div class="acc-divider"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <%= f.label :password, "新しいパスワード（任意）", class: "form-label" %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "新しいパスワードを入力", class: "form-input" %>
+            <%= render "shared/field_error", object: resource, field: :password %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation, "新しいパスワード（確認）", class: "form-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "新しいパスワードの確認", class: "form-input" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :current_password, "現在のパスワード", class: "form-label form-label--required" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワードを入力", class: "form-input" %>
+          <%= render "shared/field_error", object: resource, field: :current_password %>
+        </div>
+
+        <div class="form-actions">
+          <%= link_to "キャンセル", customers_path, class: "btn-cancel" %>
+          <%= f.submit "保存する", class: "btn-submit" %>
+        </div>
+
+      <% end %>
+
+        <div class="acc-danger-zone">
+          <div class="acc-danger-inner">
+            <div class="acc-danger-info">
+              <p class="acc-danger-title">
+                <span class="material-symbols-outlined">report_problem</span>
+                アカウントの削除
+              </p>
+              <p class="acc-danger-desc">一度削除したアカウントは元に戻せません。すべてのデータが永久に削除されます</p>
+            </div>
+            <%= link_to "アカウントを削除", registration_path(resource_name), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？この操作は取り消せません" }, class: "acc-delete-btn" %>
+          </div>
+        </div>
+
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
-    <% if @minimum_password_length %>
-      <p><em><%= @minimum_password_length %> characters minimum</em></p>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
-  </div>
-
-  <div class="field">
-    <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
-    <p><%= f.password_field :current_password, autocomplete: "current-password" %></p>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

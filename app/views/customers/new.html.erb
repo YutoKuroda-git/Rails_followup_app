@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <%= f.label :contact_name, "顧客名", class: "form-label form-label--required" %>
-            <%= f.text_field :contact_name, placeholder: "名前を入力", class: "form-input" %>
+            <%= f.text_field :contact_name, placeholder: "顧客名を入力", class: "form-input" %>
             <%= render "shared/field_error", object: @customer, field: :contact_name %>
           </div>
         </div>
@@ -27,13 +27,13 @@
         <div class="form-row">
           <div class="form-group">
             <%= f.label :email, "メールアドレス", class: "form-label" %>
-            <%= f.email_field :email, placeholder: "例）tanaka@example.com", class: "form-input" %>
+            <%= f.email_field :email, placeholder: "メールアドレスを入力", class: "form-input" %>
             <%= render "shared/field_error", object: @customer, field: :email %>
           </div>
 
           <div class="form-group">
             <%= f.label :phone, "電話番号", class: "form-label" %>
-            <%= f.telephone_field :phone, placeholder: "例）090-1234-5678 / 09012345678", class: "form-input" %>
+            <%= f.telephone_field :phone, placeholder: "090-1234-5678 / 09012345678", class: "form-input" %>
             <%= render "shared/field_error", object: @customer, field: :phone %>
           </div>
         </div>

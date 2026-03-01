@@ -1,13 +1,35 @@
 <header class="app-header">
   <div class="header-inner">
     <div class="logo-area">
-      <span class="logo-icon">⇄</span>
+      <%= image_tag "logo.png", class: "logo-img", alt: "Followup" %>
       <h1 class="app-title">Followup</h1>
     </div>
 
     <div class="user-menu">
-      <span class="user-name"><%= current_user.name %></span>
-      <div class="user-avatar"></div>
+      <button class="user-trigger" onclick="toggleUserMenu(this)">
+        <span class="user-name"><%= current_user.name %></span>
+        <div class="user-avatar">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: "user-avatar-img" %>
+          <% else %>
+            <span class="material-symbols-outlined">person</span>
+          <% end %>
+        </div>
+        <span class="material-symbols-outlined user-chevron">expand_more</span>
+      </button>
+
+      <div class="user-dropdown">
+        <%= link_to edit_user_registration_path, class: "user-dropdown-item" do %>
+          <span class="material-symbols-outlined">manage_accounts</span>
+          アカウント設定
+        <% end %>
+        <%= link_to destroy_user_session_path, class: "user-dropdown-item user-dropdown-item--logout",
+              data: { turbo_method: :delete } do %>
+          <span class="material-symbols-outlined">logout</span>
+          ログアウト
+        <% end %>
+      </div>
     </div>
+
   </div>
 </header>

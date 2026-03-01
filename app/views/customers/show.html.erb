@@ -31,12 +31,13 @@
 
       <div class="cust-info-row">
         <div class="cust-name-group">
-          <span class="material-symbols-outlined cust-info-icon">person</span>
           <% if @customer.company_name.present? %>
+            <span class="material-symbols-outlined cust-info-icon">domain</span>
             <span class="cust-company"><%= @customer.company_name %></span>
             <span class="cust-divider">|</span>
             <span class="cust-contact"><%= @customer.contact_name %></span>
           <% else %>
+            <span class="material-symbols-outlined cust-info-icon">person</span>
             <span class="cust-contact"><%= @customer.contact_name %></span>
           <% end %>
         </div>

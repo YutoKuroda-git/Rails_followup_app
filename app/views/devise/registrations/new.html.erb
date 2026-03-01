@@ -2,34 +2,37 @@
 
   <div class="signup-header">
     <h1 class="signup-title">Followup</h1>
-    <p class="signup-subtitle">Create your account</p>
+    <p class="signup-subtitle">アカウントを作成して対応履歴の記録・管理を始めましょう</p>
   </div>
 
   <div class="signup-card">
 
+    <%= render "shared/error", object: resource %>
+
     <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), local: true, class: "signup-form" do |f| %>
 
       <div class="form-group">
-        <%= f.label :name, "名前", class: "form-label" %>
-        <%= f.text_field :name, placeholder: "名前を入力", class: "form-input" %>
+        <%= f.label :name, "氏名", class: "form-label" %>
+        <%= f.text_field :name, placeholder: "氏名を入力", class: "form-input" %>
+        <%= render "shared/field_error", object: resource, field: :name %>
       </div>
 
       <div class="form-group">
         <%= f.label :email, "メールアドレス", class: "form-label" %>
         <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレスを入力", class: "form-input" %>
+        <%= render "shared/field_error", object: resource, field: :email %>
       </div>
 
       <div class="form-group">
         <%= f.label :password, "パスワード", class: "form-label" %>
-
-        <div class="form-group">
-          <%= f.password_field :password, id: "password-input", autocomplete: "new-password", placeholder: "パスワードを入力", class: "form-input" %>
-        </div>
+        <%= f.password_field :password, id: "password-input", autocomplete: "new-password", placeholder: "パスワードを入力", class: "form-input" %>
+        <%= render "shared/field_error", object: resource, field: :password %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, "確認用パスワード", class: "form-label" %>
-        <%= f.password_field :password_confirmation, placeholder: "確認用パスワードを入力", class: "form-input" %>
+        <%= f.label :password_confirmation, "パスワード（確認）", class: "form-label" %>
+        <%= f.password_field :password_confirmation, placeholder: "パスワードの確認", class: "form-input" %>
+        <%= render "shared/field_error", object: resource, field: :password_confirmation %>
       </div>
 
       <%= f.submit "アカウントを作成する", class: "btn-primary" %>
@@ -37,11 +40,11 @@
     <% end %>
 
     <div class="signup-footer">
-      <p>アカウントをお持ちですか？ <%= link_to "Log in", new_user_session_path, class: "text-link strong" %></p>
+      <p>すでにアカウントをお持ちですか？ <%= link_to "ログイン", new_user_session_path, class: "text-link" %></p>
     </div>
   </div>
 
   <footer class="signup-note">
-    Secure access for internal users
+    Copyright © Followup <%= Time.current.year %> All rights reserved
   </footer>
 </div>

@@ -18,6 +18,13 @@ ja:
         action_taken: "対応内容"
         contact_type: "対応種別"
         contacted_at: "対応日時"
+      user:
+        name: "氏名"
+        email: "メールアドレス"
+        avatar: "アイコン画像"
+        current_password: "現在のパスワード"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
 
   views:
     pagination:

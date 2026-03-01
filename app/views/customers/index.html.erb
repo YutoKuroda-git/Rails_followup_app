@@ -5,6 +5,18 @@
       <h2 class="dash-title">Followup Dashboard</h2>
       <p class="dash-sub">進行中のタスクを管理します</p>
     </div>
+
+    <div class="dash-actions">
+    <%= form_with url: customers_path, method: :get, local: true, class: "search-form" do |f| %>
+      <div class="search-input-wrap">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <%= f.text_field :q, value: params[:q], placeholder: "会社名・顧客名・メールアドレスで検索", class: "search-input" %>
+      </div>
+      <% if params[:q].present? || params[:status].present? %>
+        <%= link_to "クリア", customers_path, class: "search-clear" %>
+      <% end %>
+    <% end %>
+
     <%= link_to new_customer_path, class: "btn-add" do %>
       <span class="material-symbols-outlined">add</span>
       <span>新規追加</span>

@@ -1,12 +1,26 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_customer, only: [ :show, :edit, :update, :destroy ]
+  before_action :restrict_guest!, only: [ :destroy ]
 
   def index
     @customers         = current_user.customers.includes(:interactions).order(updated_at: :desc)
     @in_progress_count = @customers.in_progress.count
     @pending_count     = @customers.pending.count
     @completed_count   = @customers.completed.count
+
+    if params[:q].present?
+    query = "%#{params[:q]}%"
+    @customers = @customers.where(
+      "company_name LIKE :q OR contact_name LIKE :q OR email LIKE :q",
+      q: query
+      )
+    end
+
+    if params[:status].present?
+      @customers = @customers.where(status: params[:status])
+    end
+
     @customers = @customers.sort_by { |c| [ c.due_soon? ? 0 : 1, -c.updated_at.to_i ] }
     @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(10)
   end

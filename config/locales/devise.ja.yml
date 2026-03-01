@@ -1,0 +1,46 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスが確認されました"
+      send_instructions: "確認メールを送信しました"
+    failure:
+      already_authenticated: "すでにログインしています"
+      inactive: "アカウントが有効化されていません"
+      invalid: "メールアドレスまたはパスワードが違います"
+      locked: "アカウントがロックされています"
+      last_attempt: "もう一度失敗するとアカウントがロックされます"
+      not_found_in_database: "メールアドレスまたはパスワードが違います"
+      timeout: "セッションがタイムアウトしました。もう一度ログインしてください"
+      unauthenticated: "ログインしてください"
+      unconfirmed: "メールアドレスの確認が完了していません"
+    passwords:
+      no_token: "パスワードリセットトークンが無効です"
+      send_instructions: "パスワードリセットの手順をメールで送信しました"
+      updated: "パスワードを変更しました"
+      updated_not_active: "パスワードを変更しました"
+    registrations:
+      destroyed: "アカウントを削除しました"
+      signed_up: "アカウントを登録しました"
+      signed_up_but_inactive: "アカウントが有効化されていません"
+      signed_up_but_locked: "アカウントがロックされています"
+      signed_up_but_unconfirmed: "確認メールを送信しました"
+      update_needs_confirmation: "メールアドレスの確認が必要です"
+      updated: "アカウント情報を更新しました"
+      updated_but_inactive: "アカウントが有効化されていません"
+    sessions:
+      signed_in: "ログインしました"
+      signed_out: "ログアウトしました"
+      already_signed_out: "すでにログアウトしています"
+    unlocks:
+      send_instructions: "アカウントのロック解除方法をメールで送信しました"
+      unlocked: "アカウントのロックを解除しました"
+  errors:
+    messages:
+      already_confirmed: "すでに確認済みです"
+      confirmation_period_expired: "確認期限が切れました"
+      expired: "有効期限が切れています"
+      not_found: "見つかりません"
+      not_locked: "ロックされていません"
+      not_saved:
+        one: "エラーが1件あります"
+        other: "%{count}件のエラーがあります"
