@@ -12,7 +12,7 @@
 ---
 
 ## サービスURL
-
+https://rails-followup-app.onrender.com
 ---
 
 ## アプリの説明
