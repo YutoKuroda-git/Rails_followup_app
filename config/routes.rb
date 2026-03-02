@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root "devise/sessions#new"
+  root to: redirect("/users/sign_in")
 
   resources :customers do
     resources :interactions, only: [ :create, :destroy ]
