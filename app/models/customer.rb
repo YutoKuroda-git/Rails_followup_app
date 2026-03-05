@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   validates :status,        presence: true
 
   def next_due_date
-    interactions.where.not(due_date: nil).order(due_date: :asc).first&.due_date
+    interactions.where("due_date >= ?", Date.today).order(due_date: :asc).first&.due_date
   end
 
   def due_soon?
